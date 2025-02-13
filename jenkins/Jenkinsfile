@@ -5,7 +5,7 @@ pipeline
     label 'DevServer'
     }
     tools{
-        myMaven 'Maven'
+        maven 'mymaven'
     }
     stages{
          stage('Build')
