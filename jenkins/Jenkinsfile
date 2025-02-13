@@ -1,9 +1,9 @@
 pipeline
 {
 
-agent {
+    agent {
     label 'DevServer'
-}
+    }
     stages{
          stage('Build')
         {
@@ -12,11 +12,12 @@ agent {
                 sh 'mvn clean package'
             }
             post {
-  success {
+         success {
         archiveArtifacts artifacts: '**/target/*.war'
          }
             }
 
         }
    
+}
 }
