@@ -9,24 +9,14 @@ agent {
         {
            
             steps{
-                echo 'this is the build stage '
+                sh 'mvn clean package'
             }
+            post {
+  success {
+        archiveArtifacts artifacts: '**/target/*.war'
+         }
+            }
+
         }
-         stage("test")
-        {
-           
-            steps{
-            echo 'this is the test stage '
-            
-            }
-        }
-         stage('Deploy')
-        {      
-        
-            steps{
-            echo 'this is the deploy stage '
-            
-            }
-    }
-}
+   
 }
