@@ -11,10 +11,12 @@ pipeline
             steps{
                 sh 'mvn clean package'
             }
-            post {
-         success {
-        archiveArtifacts artifacts: '**/target/*.war'
-         }
+
+        post {
+             success {
+                echo 'Build Success archiving.............'
+                archiveArtifacts artifacts: '**/target/*.war'
+                    }
             }
 
         }
