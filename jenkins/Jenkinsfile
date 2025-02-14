@@ -23,14 +23,30 @@ pipeline
                 echo "hello $NAME ${name}"
             }
 
+
+        }
+        stage('test')
+        {
+            parllel {
+                stage('testA'){
+                    steps{
+                        echo "this is test A"
+                    }
+                }
+                stage('testB'){
+                    steps{
+                        echo "this is test B"
+                    }
+                }
+            }
         post {
              success {
                 echo 'Build Success archiving.............'
                 archiveArtifacts artifacts: '**/target/*.jar'
                     }
             }
-
         }
+        
    
 }
 }
