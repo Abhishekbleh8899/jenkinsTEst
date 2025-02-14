@@ -2,8 +2,7 @@ pipeline
 {
 
     agent {
-    label 'DevServer'
-    label 'ProdServer'
+        label 'ProdServer'
     }
     parameters {
         string defaultValue: 'ProdSrver', name : 'DevServer'
