@@ -3,6 +3,13 @@ pipeline
 
     agent {
     label 'DevServer'
+    label 'ProdServer'
+    }
+    parameters {
+        string defaultValue: 'ProdSrver', name : 'DevServer'
+    }
+    environment {
+     Name ="DevServer"
     }
     tools{
         maven 'mymaven'
@@ -13,6 +20,8 @@ pipeline
            
             steps{
                 sh 'mvn clean package'
+                echo "Build Success"
+                echo "hello $NAME ${name}"
             }
 
         post {
