@@ -25,9 +25,10 @@ pipeline
 
 
         }
-        stage('test')
+         stage('test')
         {
-            parllel {
+            parallel {
+
                 stage('testA'){
                     steps{
                         echo "this is test A"
