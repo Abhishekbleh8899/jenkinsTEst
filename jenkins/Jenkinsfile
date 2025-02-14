@@ -5,8 +5,9 @@ pipeline
         label 'ProdServer'
     }
     parameters {
-        string defaultValue: 'ProdSrver', name : 'DevServer'
-    }
+  choice choices: ['DevServer', 'ProdServer'], name: 'enviorment_variables'
+}
+
     environment {
      Name ="DevServer"
     }
@@ -18,9 +19,8 @@ pipeline
         {
            
             steps{
-                sh 'mvn clean package'
-                echo "Build Success"
-                echo "hello $NAME ${name}"
+                sh 'mvn clean package -DskipTests=true'
+                
             }
 
 
@@ -30,13 +30,21 @@ pipeline
             parallel {
 
                 stage('testA'){
+                    agent {
+                        label 'DevServer'
+                    }
                     steps{
                         echo "this is test A"
+                        sh 'mvn test'
                     }
                 }
                 stage('testB'){
+                    agent {
+                        label 'ProdServer'
+                    }
                     steps{
                         echo "this is test B"
+                        sh 'mvn test'
                     }
                 }
             }
